@@ -1,9 +1,16 @@
 import React from "react"
 
 const Button3 = () => {
-    return <div>
-        <button> LGMA</button>
-    </div>
+    const clicked = () => {
+        alert("working")
+    } 
+    return(
+         <div>
+             <button onClick={clicked}>Wegmans</button>
+        </div>
+    )
+
+    
 }
 
 export default Button3

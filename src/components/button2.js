@@ -1,9 +1,14 @@
 import React from "react"
 
 const Button2 = () => {
-    return <div>
-        <button>TF Approved</button>
-    </div>
+    const clicked = () => {
+        alert("working")
+    } 
+    return(
+        <div>
+            <button onClick={clicked}>TF Approved</button>
+        </div>
+    )
 }
 
 export default Button2

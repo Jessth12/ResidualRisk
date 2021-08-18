@@ -1,9 +1,14 @@
 import React from "react"
 
 const Button4 = () => {
-    return <div>
-        <button>Full TF</button>
-    </div>
+    const clicked = () => {
+        alert("working")
+    }
+    return (
+        <div>
+            <button onClick={clicked}>Full TF</button>
+        </div>
+    )
 }
 
-export default Button4
+export default Button4 
