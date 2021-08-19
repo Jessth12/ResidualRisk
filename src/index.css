@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: beige;
+  background: white;
 }
 
 code {
@@ -14,5 +14,25 @@ code {
 
     
 }
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 4px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: beige;
+}
 
 
+.buttonContainer {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  padding: 15px 32px;
+}

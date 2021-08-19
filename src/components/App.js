@@ -11,13 +11,15 @@ const App = () => {
 
 
 
-       <div>
+       <div className='container'>
            <h1>Risk Reduction</h1>
            <h2>Choose your option: </h2>
-           <Button1 />
-           <Button2 />
-           <Button3 />
-           <Button4 />
+           <div className='buttonContainer'>
+                <Button1 />
+                <Button2 />
+                <Button3 />
+                <Button4 />
+           </div>
        </div>
     )
 
