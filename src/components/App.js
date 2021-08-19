@@ -12,7 +12,7 @@ const App = () => {
 
        <div>
            <h1>Risk Reduction</h1>
-           <h2>Choose your option</h2>
+           <h2>Choose your option: </h2>
            <Button1 />
            <Button2 />
            <Button3 />
