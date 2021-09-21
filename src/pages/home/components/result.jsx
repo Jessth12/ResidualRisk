@@ -2,6 +2,10 @@ import React from 'react';
 import { GAP, Process, getResidualRiskSummary } from './../../../util/math';
 import MyResponsiveBar from './bar';
 
+function round(base, sigs) {
+    return Number.parseFloat(base).toPrecision(sigs);
+}
+
 function Result(props) {
     let final_result = undefined;
     if (props.results != undefined) {
@@ -61,22 +65,22 @@ function Result(props) {
                                 </tbody>
                             </table>
                             <hr/>
-                            <h4>Base Illness Sum: {final_result['base_sum']}</h4>
-                            <h4>Gap Sum: {final_result['stage1_sum']}</h4>
-                            <h4>Raw Product Sum: {final_result['stage2_sum']}</h4>
-                            <h4>Process Sum: {final_result['stage3_sum']}</h4>
-                            <h4>Finished Product Sum: {final_result['stage4_sum']}</h4>
+                            <h4>Base Illness Sum: {round(final_result['base_sum'], 4)}</h4>
+                            <h4>Gap Sum: {round(final_result['stage1_sum'], 4)}</h4>
+                            <h4>Raw Product Sum: {round(final_result['stage2_sum']), 4}</h4>
+                            <h4>Process Sum: {round(final_result['stage3_sum'], 4)}</h4>
+                            <h4>Finished Product Sum: {round(final_result['stage4_sum'], 4)}</h4>
                             <hr/>
                             <h4>Base Illness Reduction: 0%</h4>
-                            <h4>Gap Reduction: {final_result['stage1_reduct']}</h4>
-                            <h4>Raw Product Tests Reduction: {final_result['stage2_reduct']}</h4>
-                            <h4>Process Reduction: {final_result['stage3_reduct']}</h4>
-                            <h4>Finished Product Tests Reduction: {final_result['stage4_reduct']}</h4>
+                            <h4>Gap Reduction: {round(final_result['stage1_reduct'] * 100, 4)}%</h4>
+                            <h4>Raw Product Tests Reduction: {round(final_result['stage2_reduct'] * 100, 4)}%</h4>
+                            <h4>Process Reduction: {round(final_result['stage3_reduct'] * 100, 4)}%</h4>
+                            <h4>Finished Product Tests Reduction: {round(final_result['stage4_reduct'] * 100, 4)}%</h4>
                             <hr/>
-                            <h4>Stage 1 Impact: {final_result['stage1_impact']}</h4>
-                            <h4>Stage 2 Impact: {final_result['stage2_impact']}</h4>
-                            <h4>Stage 3 Impact: {final_result['stage3_impact']}</h4>
-                            <h4>Stage 4 Impact: {final_result['stage4_impact']}</h4>
+                            <h4>Stage 1 Impact: {round(final_result['stage1_impact'] * 100, 6)}%</h4>
+                            <h4>Stage 2 Impact: {round(final_result['stage2_impact'] * 100, 6)}%</h4>
+                            <h4>Stage 3 Impact: {round(final_result['stage3_impact'] * 100, 6)}%</h4>
+                            <h4>Stage 4 Impact: {round(final_result['stage4_impact'] * 100, 6)}%</h4>
                             <hr/>
                             <div style={{height: '30rem', width: '100%'}}>
                                 <MyResponsiveBar results={[{'id': 1, 'stage1_impact': final_result['stage1_impact'], 'stage2_impact': final_result['stage2_impact'], 'stage3_impact': final_result['stage3_impact'], 'stage4_impact': final_result['stage4_impact']}]} />

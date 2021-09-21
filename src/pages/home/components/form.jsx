@@ -107,7 +107,7 @@ function Form(props) {
                 />
                 <label for="gap_choice_4">TF Full</label>
 
-                <input
+                {/* <input
                     type="radio"
                     id="gap_choice_5"
                     name="gap"
@@ -119,7 +119,7 @@ function Form(props) {
                 <input 
                     type="number"
                     value={GapOther}
-                />
+                /> */}
             </div>
 
             <h5>Raw Test Selection (0 - 90)</h5>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Page from './components/page';
 
 function Home() {
-    const [pages, setPages] = useState(3);
+    const [pages, setPages] = useState(1);
     
     return (
         <div
@@ -34,10 +34,10 @@ function Home() {
             </div>
             <div
                 style={{
-                    display: 'flex'
+                    display: 'flex',
+                    overflow: 'scroll'
                 }}
             >
-                <Page />
                 {
                     [...Array(pages)].map((x, i) => {
                         return <Page key={i} />;
