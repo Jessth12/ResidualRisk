@@ -54,7 +54,7 @@ function Form(props) {
     }, [GAP, Raw, Process, Finished])
 
     return (
-        <div
+        <form
             style={{
                 border: "1px solid black",
                 padding: '1rem'
@@ -152,7 +152,7 @@ function Form(props) {
                 />
             </div>
 
-        </div>
+        </form>
     )
 }
 
