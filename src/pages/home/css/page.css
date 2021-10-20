@@ -1,0 +1,18 @@
+.page_container {
+    background-color: lightgray;
+}
+
+.page_expand_header {
+    width: 10rem;
+    border: 1px solid black;
+    padding: 1rem;
+    background-color: lightgray;
+    height: fit-content;
+}
+
+.page_expanded_header {
+    width: fit-content;
+    border: 1px solid black;
+    padding: 1rem;
+    background-color: lightgray;
+}
