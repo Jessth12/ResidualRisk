@@ -1,5 +1,5 @@
 import React from 'react';
-import { GAP, GAP_AG, GAP_HAR, Process, getResidualRiskSummary } from './../../../util/math';
+import { GAP, GAP_AG, GAP_HAR, Process, getResidualRiskSummary, AT_HAR, PRE_HAR } from './../../../util/math';
 import MyResponsiveBar from './bar';
 import Collapsible from 'react-collapsible';
 import '../css/result.css';
@@ -13,7 +13,8 @@ function Result(props) {
     if (props.results != undefined) {
         let numerical = {
             "GAP_AG": GAP_AG[props.results['GAP_AG']],
-            "GAP_HAR": GAP_HAR[props.results['GAP_HAR']],
+            "PRE_HAR": PRE_HAR[props.results['PRE_HAR']],
+            "AT_HAR": AT_HAR[props.results['AT_HAR']],
             "Raw": props.results['Raw'],
             "Process": Process[props.results['Process']],
             "Finished": props.results['Finished']
@@ -21,7 +22,8 @@ function Result(props) {
         console.log(numerical);
         let risk = getResidualRiskSummary(
             numerical['GAP_AG'],
-            numerical['GAP_HAR'],
+            numerical['PRE_HAR'],
+            numerical['AT_HAR'],
             numerical['Raw'],
             numerical['Process'],
             numerical['Finished']
@@ -50,6 +52,8 @@ function Result(props) {
                                             <th>Load</th>
                                             <th>Probabilty of Illness</th>
                                             <th>Gap</th>
+                                            <th>Pre Harvest</th>
+                                            <th>At Harvest</th>
                                             <th>Raw Product Tests</th>
                                             <th>Process</th>
                                             <th>Finish Product Tests</th>
@@ -64,6 +68,8 @@ function Result(props) {
                                                         <th>{round(final_result['stage2'][i], 5)}</th>
                                                         <th>{round(final_result['stage3'][i], 5)}</th>
                                                         <th>{round(final_result['stage4'][i], 5)}</th>
+                                                        <th>{round(final_result['stage5'][i], 5)}</th>
+                                                        <th>{round(final_result['stage6'][i], 5)}</th>
                                                     </tr>
                                                 )
                                             })
@@ -85,9 +91,11 @@ function Result(props) {
                             <h4>Finished Product Tests Reduction: {round(final_result['stage4_reduct'] * 100, 4)}%</h4> */}
                             <hr/>
                             <h4>GAP Impact: {round(final_result['stage1_impact'] * 100, 6)}%</h4>
-                            <h4>Raw Product Test: {round(final_result['stage2_impact'] * 100, 6)}%</h4>
-                            <h4>Process Impact: {round(final_result['stage3_impact'] * 100, 6)}%</h4>
-                            <h4>Finished Product Impact: {round(final_result['stage4_impact'] * 100, 6)}%</h4>
+                            <h4>Pre Harvest Testing Impact: {round(final_result['stage2_impact'] * 100, 6)}%</h4>
+                            <h4>At Harvest Testing Impact: {round(final_result['stage3_impact'] * 100, 6)}%</h4>
+                            <h4>Raw Product Test: {round(final_result['stage4_impact'] * 100, 6)}%</h4>
+                            <h4>Process Impact: {round(final_result['stage5_impact'] * 100, 6)}%</h4>
+                            <h4>Finished Product Impact: {round(final_result['stage6_impact'] * 100, 6)}%</h4>
                             <hr/>
                             <div style={{height: '30rem', width: '30rem'}}>
                                 <MyResponsiveBar 
@@ -95,10 +103,12 @@ function Result(props) {
                                         [
                                             {
                                                 'id': 1, 
-                                                'GAP Impact': round(final_result['stage1_impact'], 6), 
-                                                'Raw Product Impact': round(final_result['stage2_impact'], 6), 
-                                                'Process Impact': round(final_result['stage3_impact'], 6), 
-                                                'Finished Product Impact': round(final_result['stage4_impact'], 6)
+                                                'GAP Impact': round(final_result['stage1_impact'], 6),
+                                                'Pre Harvest Impact': round(final_result['stage2_impact'], 6),
+                                                'At Harvest Impact': round(final_result['stage3_impact'], 6),
+                                                'Raw Product Impact': round(final_result['stage4_impact'], 6), 
+                                                'Process Impact': round(final_result['stage5_impact'], 6), 
+                                                'Finished Product Impact': round(final_result['stage6_impact'], 6)
                                             }
                                         ]
                                     }

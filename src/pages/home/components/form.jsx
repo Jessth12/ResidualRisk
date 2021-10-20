@@ -9,6 +9,7 @@ function Form(props) {
     const [Process, setProcess] = useState(undefined);
     const [Finished, setFinished] = useState(1);
     const [improvement, setImprovement] = useState(undefined);
+    const [AT_HAR, setAT_HAR] = useState(undefined);
 
     const handleGAPAGChange = (event) => {
         console.log(event.target.value);
@@ -23,6 +24,11 @@ function Form(props) {
     const handlePREHARChange = (event) => {
         console.log(event.target.value);
         setPRE_HAR(event.target.value);
+    }
+    
+    const handleATHARChange = (event) => {
+        console.log(event.target.value);
+        setAT_HAR(event.target.value);
     }
 
     const handleImprovement = (event) => {
@@ -63,16 +69,17 @@ function Form(props) {
     useEffect(() => {
         if (
             GAP_AG != undefined && 
-            GAP_HAR != undefined && 
+            PRE_HAR != undefined && 
+            AT_HAR != undefined &&
             Raw != undefined && 
             PRE_HAR != undefined && 
             Process != undefined && 
             Finished != undefined &&
             improvement != undefined
             ) {
-            props.setResults({GAP_AG, GAP_HAR, PRE_HAR, Raw, Process, Finished, improvement});
+            props.setResults({GAP_AG, AT_HAR, PRE_HAR, Raw, Process, Finished, improvement});
         }
-    }, [GAP_AG, GAP_HAR, PRE_HAR, Raw, Process, Finished, improvement])
+    }, [GAP_AG, AT_HAR, PRE_HAR, Raw, Process, Finished])
 
     return (
         <form
@@ -82,8 +89,8 @@ function Form(props) {
             }}
         >
 
-            <h5>GAP Selection</h5>
-            <h6>Agriculture Practices</h6>
+            <h4>GAP Selection</h4>
+            <h5>Agriculture Practices</h5>
             <div>
                 <input 
                     type="radio" 
@@ -106,7 +113,7 @@ function Form(props) {
                 />
                 <label for="gap_ag_2">TF added Agricultural Practices</label>
             </div>
-            <h6>Harvest Practices</h6>
+            <h5>Harvest Practices</h5>
             <div>
                 <input 
                     type="radio" 
@@ -130,7 +137,7 @@ function Form(props) {
                 <label for="gap_har_2">TF added Harvest Practices</label>
             </div>
 
-            <h5>Pre-Harvest Testing</h5>
+            <h4>Pre-Harvest Testing</h4>
             <div>
                 <input 
                     type="radio" 
@@ -142,49 +149,52 @@ function Form(props) {
                 />
                 <label for="pre_har_1">None</label>
 
-                <br/>
+                <h5>LGMA Based</h5>
+
                 <input 
                     type="radio" 
                     id="pre_har_2" 
                     name="pre_har" 
-                    value="pending" 
-                    checked={PRE_HAR == 'pending'}
+                    value="risk" 
+                    checked={PRE_HAR == 'risk'}
                     onChange={handlePREHARChange}
                 />
-                <label for="pre_har_2">Pending</label>
+                <label for="pre_har_2">Risked based sampling</label>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="pre_har_3" 
                     name="pre_har" 
-                    value="all" 
-                    checked={PRE_HAR == 'all'}
+                    value="lot" 
+                    checked={PRE_HAR == 'lot'}
                     onChange={handlePREHARChange}
                 />
-                <label for="pre_har_3">All Lots</label>
+                <label for="pre_har_3">Lot based testing</label>
+
+                <h5>Voluntary Testing (Grab samples)</h5>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="pre_har_4" 
                     name="pre_har" 
-                    value="all_grl" 
-                    checked={PRE_HAR == 'all_grl'}
+                    value="per_dec" 
+                    checked={PRE_HAR == 'per_dec'}
                     onChange={handlePREHARChange}
                 />
-                <label for="pre_har_4">All Lots (GRL)</label>
+                <label for="pre_har_4">Ten 150g samples per decision</label>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="pre_har_5" 
                     name="pre_har" 
-                    value="wegman" 
-                    checked={PRE_HAR == 'wegman'}
+                    value="independent" 
+                    checked={PRE_HAR == 'independent'}
                     onChange={handlePREHARChange}
                 />
-                <label for="pre_har_5">Wegman's flavor</label>
+                <label for="pre_har_5">Independent 150g samples</label>
 
                 <br/>
                 <input 
@@ -195,21 +205,59 @@ function Form(props) {
                     checked={PRE_HAR == 'har_aggregated'}
                     onChange={handlePREHARChange}
                 />
-                <label for="pre_har_6">Harvest Aggregated Sampling</label>
+                <label for="pre_har_6">In field aggregated sampling</label>
+            </div>
+
+            
+            <h4>At-Harvest Testing</h4>
+            <div>
+                <input 
+                    type="radio" 
+                    id="at_har_1" 
+                    name="at_har" 
+                    value="none" 
+                    checked={AT_HAR == 'none'}
+                    onChange={handleATHARChange}
+                />
+                <label for="at_har_1">None</label>
 
                 <br/>
                 <input 
                     type="radio" 
-                    id="pre_har_7" 
-                    name="pre_har" 
-                    value="aggregated" 
-                    checked={PRE_HAR == 'aggregated'}
-                    onChange={handlePREHARChange}
+                    id="at_har_2" 
+                    name="at_har" 
+                    value="150g" 
+                    checked={AT_HAR == '150g'}
+                    onChange={handleATHARChange}
                 />
-                <label for="pre_har_7">Aggregated Sampling</label>
+                <label for="at_har_2">Ten 150g samples per decision</label>
+
+                <br/>
+                <input 
+                    type="radio" 
+                    id="at_har_3" 
+                    name="at_har" 
+                    value="independent" 
+                    checked={AT_HAR == 'independent'}
+                    onChange={handleATHARChange}
+                />
+                <label for="at_har_3">Independent 150g samples</label>
+
+                <br/>
+                <input 
+                    type="radio" 
+                    id="at_har_4" 
+                    name="at_har" 
+                    value="2hour" 
+                    checked={AT_HAR == '2hour'}
+                    onChange={handleATHARChange}
+                />
+                <label for="at_har_4">@Harvest 2-hour test</label>
+
+                
             </div>
 
-            <h5>Raw Product Tests (0 - 90)</h5>
+            <h4>Raw Product Tests (0 - 90)</h4>
             <div>
                 <input 
                     type="number" 
@@ -220,7 +268,7 @@ function Form(props) {
                 />
             </div>
             
-            <h5>Process</h5>
+            <h4>Process</h4>
             <div>
                 <input 
                     type="radio" 
@@ -265,53 +313,6 @@ function Form(props) {
                     onChange={handleFinishedChange}    
                 />
             </div>
-
-            <h5>Continuous Improvement</h5>
-            <div>
-                <input 
-                    type="radio" 
-                    id="improvement_1" 
-                    name="improvement" 
-                    value="rally" 
-                    checked={improvement == "rally"}
-                    onChange={handleImprovement}
-                />
-                <label for="improvement_1">Romaine Rally</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="improvement_2" 
-                    name="improvement" 
-                    value="micro" 
-                    checked={improvement == "micro"}
-                    onChange={handleImprovement}
-                />
-                <label for="improvement_2">MicroTally</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="improvement_3" 
-                    name="improvement" 
-                    value="trans" 
-                    checked={improvement == "trans"}
-                    onChange={handleImprovement}
-                />
-                <label for="improvement_3">Transference Investigation</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="improvement_4" 
-                    name="improvement" 
-                    value="hold" 
-                    checked={improvement == "hold"}
-                    onChange={handleImprovement}
-                />
-                <label for="improvement_4">Test and Hold</label>
-            </div>
-
         </form>
     )
 }
