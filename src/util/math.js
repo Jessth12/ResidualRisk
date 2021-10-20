@@ -6,9 +6,20 @@ export const GAP = {
 
 }
 
+export const GAP_AG = {
+    "basic": 2,
+    "added": 3
+}
+
+export const GAP_HAR = {
+    "basic": 2,
+    "added": 3
+}
+
 export const Process = {
-    "citric": 5.01,
-    "sw": 10
+    "traditional": 5.01,
+    "tf_enhanced": 7,
+    "sw_enhanced": 10
 }
 
 const getLineSpace = function (start, end, n) {
@@ -56,10 +67,12 @@ const sum = function(data) {
     return data.reduce((a, b) => a + b, 0);
 }
 
-export function getResidualRiskSummary(GAP, Raw, Process, Finished) {
+export function getResidualRiskSummary(GAP_AG, GAP_HAR, Raw, Process, Finished) {
 
     let basic_load = getLogSpace(0.0001, 10, 1.3);
     console.log(basic_load);
+
+    let GAP = GAP_AG * GAP_HAR;
 
     let table = {
         'load': basic_load,

@@ -5,7 +5,7 @@ const MyResponsiveBar = ({results}) => (
     <ResponsiveBar 
         data={results}
         indexBy="id"
-        keys={[ 'stage1_impact', 'stage2_impact', 'stage3_impact', 'stage4_impact']}
+        keys={[ 'GAP Impact', 'Raw Product Impact', 'Process Impact', 'Finished Product Impact']}
         colors={{ scheme: 'nivo' }}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
@@ -15,6 +15,7 @@ const MyResponsiveBar = ({results}) => (
         borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
         axisTop={null}
         axisRight={null}
+        maxValue={1}
     />
 );
 

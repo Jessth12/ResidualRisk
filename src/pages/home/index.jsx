@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Page from './components/page';
+import './css/index.css';
 
 function Home() {
     const [pages, setPages] = useState(1);
@@ -15,16 +16,19 @@ function Home() {
             <div
                 style={{
                     display: "flex",
-                    flexDirection: "row"
+                    flexDirection: "row",
+                    alignItems: "center"
                 }}
             >
-                <h3>Residual Risk App</h3>
+                <h3>Relative Risk App</h3>
                 <button
+                    className="page_control_button"
                     onClick={() => {
                         setPages(pages + 1);
                     }}
                 >Add</button>
                 <button
+                    className="page_control_button"
                     onClick={() => {
                         if (pages > 0) {
                             setPages(pages - 1);
