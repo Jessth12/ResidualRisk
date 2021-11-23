@@ -33,7 +33,7 @@ export default function Admin_Dialog(props) {
                     </div>
 
                     <div className="admin_config_row">    
-                        <h5>TF added Agricultural Practices</h5>
+                        <h5>Enhanced Feedback Driven Agricultural Practices</h5>
                         <input
                             type="number"
                             value={props.store['GAP_AG']['added']}
@@ -61,7 +61,7 @@ export default function Admin_Dialog(props) {
                     </div>
 
                     <div className="admin_config_row">    
-                        <h5>TF added Harvest Practices</h5>
+                        <h5>Seven-Step Sanitation Practices</h5>
                         <input
                             type="number"
                             value={props.store['GAP_HAR']['added']}
@@ -223,7 +223,6 @@ export default function Admin_Dialog(props) {
                     </div>
 
                 </div>
-
 
 
             </div>

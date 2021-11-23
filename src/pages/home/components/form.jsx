@@ -114,7 +114,7 @@ function Form(props) {
                     checked={GAP_AG == 'added'}
                     onChange={handleGAPAGChange}
                 />
-                <label for="gap_ag_3">TF added Agricultural Practices</label>
+                <label for="gap_ag_3">Enhanced Feedback Driven Agricultural Practices</label>
             </div>
             <h5>Harvest Practices</h5>
             <div>
@@ -148,7 +148,7 @@ function Form(props) {
                     checked={GAP_HAR == 'added'}
                     onChange={handleGAPHARChange}
                 />
-                <label for="gap_har_3">TF added Harvest Practices</label>
+                <label for="gap_har_3">Seven-Step Sanitation Practices</label>
             </div>
 
             <h4>Pre-Harvest Testing - {getFinalResult('stage2_impact')}%</h4>
