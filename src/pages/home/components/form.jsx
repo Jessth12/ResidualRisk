@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+function round(base, sigs) {
+    return Number.parseFloat(base).toPrecision(sigs);
+}
+
 function Form(props) {
-    const [GAP, setGAP] = useState(undefined);
-    const [GAP_AG, setGAP_AG] = useState(undefined);
-    const [GAP_HAR, setGAP_HAR] = useState(undefined);
-    const [PRE_HAR, setPRE_HAR] = useState(undefined);
-    const [Raw, setRaw] = useState(1);
-    const [Process, setProcess] = useState(undefined);
-    const [Finished, setFinished] = useState(1);
-    const [improvement, setImprovement] = useState(undefined);
-    const [AT_HAR, setAT_HAR] = useState(undefined);
+    const [GAP_AG, setGAP_AG] = useState("none");
+    const [GAP_HAR, setGAP_HAR] = useState("none");
+    const [PRE_HAR, setPRE_HAR] = useState("none");
+    const [Process, setProcess] = useState("none");
+    const [Finished, setFinished] = useState(0);
+    const [AT_HAR, setAT_HAR] = useState("none");
 
     const handleGAPAGChange = (event) => {
         console.log(event.target.value);
@@ -31,23 +32,6 @@ function Form(props) {
         setAT_HAR(event.target.value);
     }
 
-    const handleImprovement = (event) => {
-        setImprovement(event.target.value);
-    }
-
-    const handleRawChange = (event) => {
-        let raw = event.target.value;
-        console.log('Raw: ' + raw);
-        
-        if (raw > 90) {
-            raw = 90;
-        } else if (raw < 1) {
-            raw = 1;
-        }
-
-        setRaw(raw);
-    }
-
     const handleProcessChange = (event) => {
         console.log(event.target.value);
         setProcess(event.target.value);
@@ -59,11 +43,22 @@ function Form(props) {
         
         if (finished > 90) {
             finished = 90;
-        } else if (finished < 1) {
-            finished = 1;
+        } else if (finished < 0) {
+            finished = 0;
         }
 
         setFinished(finished);
+    }
+
+    const getFinalResult = (key) => {
+        if (props.final_results == undefined)
+            return "";
+
+        let raw_val = props.final_results[key] * 100;
+
+        let val = round(raw_val, 4)
+
+        return val;
     }
 
     useEffect(() => {
@@ -71,13 +66,12 @@ function Form(props) {
             GAP_AG != undefined && 
             PRE_HAR != undefined && 
             AT_HAR != undefined &&
-            Raw != undefined && 
             Process != undefined && 
             Finished != undefined
             ) {
-            props.setResults({GAP_AG, AT_HAR, PRE_HAR, Raw, Process, Finished, improvement});
+            props.setResults({GAP_AG, GAP_HAR, AT_HAR, PRE_HAR, Process, Finished});
         }
-    }, [GAP_AG, AT_HAR, PRE_HAR, Raw, Process, Finished])
+    }, [GAP_AG, GAP_HAR, AT_HAR, PRE_HAR, Process, Finished])
 
     return (
         <form
@@ -87,29 +81,40 @@ function Form(props) {
             }}
         >
 
-            <h4>GAP Selection</h4>
+            <h4>GAP Selection - {getFinalResult('stage1_impact')}%</h4>
             <h5>Agriculture Practices</h5>
             <div>
                 <input 
                     type="radio" 
                     id="gap_ag_1" 
                     name="gap_ag" 
-                    value="basic" 
-                    checked={GAP_AG == 'basic'}
+                    value="none" 
+                    checked={GAP_AG == 'none'}
                     onChange={handleGAPAGChange}
                 />
-                <label for="gap_ag_1">LGMA Basic Agriculture Practices</label>
+                <label for="gap_ag_1">None</label>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="gap_ag_2" 
                     name="gap_ag" 
+                    value="basic" 
+                    checked={GAP_AG == 'basic'}
+                    onChange={handleGAPAGChange}
+                />
+                <label for="gap_ag_2">LGMA Basic Agriculture Practices</label>
+
+                <br/>
+                <input 
+                    type="radio" 
+                    id="gap_ag_3" 
+                    name="gap_ag" 
                     value="added" 
                     checked={GAP_AG == 'added'}
                     onChange={handleGAPAGChange}
                 />
-                <label for="gap_ag_2">TF added Agricultural Practices</label>
+                <label for="gap_ag_3">TF added Agricultural Practices</label>
             </div>
             <h5>Harvest Practices</h5>
             <div>
@@ -117,25 +122,36 @@ function Form(props) {
                     type="radio" 
                     id="gap_har_1" 
                     name="gap_har" 
-                    value="basic" 
-                    checked={GAP_HAR == 'basic'}
+                    value="none" 
+                    checked={GAP_HAR == 'none'}
                     onChange={handleGAPHARChange}
                 />
-                <label for="gap_har_1">LGMA Basic Harvest Practice</label>
+                <label for="gap_har_1">None</label>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="gap_har_2" 
                     name="gap_har" 
+                    value="basic" 
+                    checked={GAP_HAR == 'basic'}
+                    onChange={handleGAPHARChange}
+                />
+                <label for="gap_har_2">LGMA Basic Harvest Practice</label>
+
+                <br/>
+                <input 
+                    type="radio" 
+                    id="gap_har_3" 
+                    name="gap_har" 
                     value="added" 
                     checked={GAP_HAR == 'added'}
                     onChange={handleGAPHARChange}
                 />
-                <label for="gap_har_2">TF added Harvest Practices</label>
+                <label for="gap_har_3">TF added Harvest Practices</label>
             </div>
 
-            <h4>Pre-Harvest Testing</h4>
+            <h4>Pre-Harvest Testing - {getFinalResult('stage2_impact')}%</h4>
             <div>
                 <input 
                     type="radio" 
@@ -206,7 +222,7 @@ function Form(props) {
             </div>
 
             
-            <h4>At-Harvest Testing</h4>
+            <h4>At-Harvest Testing - {getFinalResult('stage3_impact')}%</h4>
             <div>
                 <input 
                     type="radio" 
@@ -253,54 +269,54 @@ function Form(props) {
 
                 
             </div>
-
-            <h4>Raw Product Tests (0 - 90)</h4>
-            <div>
-                <input 
-                    type="number" 
-                    max="90" 
-                    min="0"
-                    value={Raw}
-                    onChange={handleRawChange}
-                />
-            </div>
             
-            <h4>Process</h4>
+            <h4>Process - {getFinalResult('stage4_impact')}%</h4>
             <div>
                 <input 
                     type="radio" 
                     id="process_choice_1" 
                     name="process" 
-                    value="traditional" 
-                    checked={Process == "traditional"}
+                    value="none" 
+                    checked={Process == "none"}
                     onChange={handleProcessChange}
                 />
-                <label for="process_choice_1">Traditional</label>
-
+                <label for="process_choice_1">None</label>
+                
                 <br/>
                 <input 
                     type="radio" 
                     id="process_choice_2" 
                     name="process" 
-                    value="tf_enhanced" 
-                    checked={Process == "tf_enhanced"}
+                    value="traditional" 
+                    checked={Process == "traditional"}
                     onChange={handleProcessChange}
                 />
-                <label for="process_choice_2">TF Enhanced</label>
+                <label for="process_choice_2">Traditional</label>
 
                 <br/>
                 <input 
                     type="radio" 
                     id="process_choice_3" 
                     name="process" 
+                    value="tf_enhanced" 
+                    checked={Process == "tf_enhanced"}
+                    onChange={handleProcessChange}
+                />
+                <label for="process_choice_3">TF Enhanced</label>
+
+                <br/>
+                <input 
+                    type="radio" 
+                    id="process_choice_4" 
+                    name="process" 
                     value="sw_enhanced" 
                     checked={Process == "sw_enhanced"}
                     onChange={handleProcessChange}
                 />
-                <label for="process_choice_3">SW Enhanced</label>
+                <label for="process_choice_4">SW Enhanced</label>
             </div>
 
-            <h5>Finished Product Tests (0 - 90)</h5>
+            <h5>Finished Product Tests (0 - 90) - {getFinalResult('stage5_impact')}%</h5>
             <div>
                 <input 
                     type="number" 

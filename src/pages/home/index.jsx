@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Page from './components/page';
 import './css/index.css';
 
-function Home() {
+function Home(props) {
     const [pages, setPages] = useState(1);
     
     return (
@@ -20,17 +20,21 @@ function Home() {
                     alignItems: "center"
                 }}
             >
-                <h3>Relative Risk App</h3>
+                <h3
+                >Relative Risk App</h3>
                 <button
                     className="page_control_button"
                     onClick={() => {
-                        setPages(pages + 1);
+                        if (pages < 3) {
+                            setPages(pages + 1);
+                        }
+                    
                     }}
                 >Add</button>
                 <button
                     className="page_control_button"
                     onClick={() => {
-                        if (pages > 0) {
+                        if (pages > 1) {
                             setPages(pages - 1);
                         }
                     }}
@@ -44,7 +48,7 @@ function Home() {
             >
                 {
                     [...Array(pages)].map((x, i) => {
-                        return <Page key={i} />;
+                        return <Page store={props.store} key={i} />;
                     })
                 }
             </div>
