@@ -18,7 +18,11 @@ const App = () => {
     }, [menuKey])
 
     return (
-        <div>
+        <div
+          style={{
+            backgroundColor: "#eee"
+          }}
+        >
             <Home store={store} />
             <Admin_Dialog open={openAdmin} store={store} setStore={setStore} />
         </div>

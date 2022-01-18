@@ -14,7 +14,6 @@ function Result(props) {
     return (
         <div
             style={{
-                border: "1px solid black",
                 padding: '1rem'
             }}
         >
