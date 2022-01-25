@@ -3,6 +3,7 @@ import Page from './components/page';
 import './css/index.css';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 
 function Home(props) {
     const [pages, setPages] = useState(1);
@@ -61,6 +62,18 @@ function Home(props) {
                         return <Page store={props.store} key={i} />;
                     })
                 }
+            </div>
+            <div
+                style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "2rem"
+                }}
+            >
+                <Typography>
+                    ©2022 SmartWash® Solutions, LLC - All Rights Reserved. 
+                </Typography>
             </div>
         </div>
     );

@@ -18,7 +18,7 @@ const storeValues = {
         "sw_enhanced": 50
     },
     "PRE_HAR": {
-        "none": 0,
+        "none": 1,
         "risk": 6,
         "lot":  9,
         "per_dec": 10,
