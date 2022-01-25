@@ -244,7 +244,7 @@ function Form(props) {
                 </Typography>
             
                 <RadioGroup
-                    value={AT_HAR}
+                    value={Process}
                     onChange={(event) => {
                         setProcess(event.target.value);
                     }}
