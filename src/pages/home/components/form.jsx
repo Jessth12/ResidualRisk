@@ -1,4 +1,9 @@
+import { RadioGroup, Radio, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { TextField } from '@mui/material';
 
 function round(base, sigs) {
     return Number.parseFloat(base).toPrecision(sigs);
@@ -77,257 +82,208 @@ function Form(props) {
     return (
         <form
             style={{
-                border: "1px solid black",
                 padding: '1rem'
             }}
         >
 
-            <h4>GAP Selection - {getFinalResult('stage1_impact')}%</h4>
-            <h5>Agriculture Practices</h5>
-            <div>
-                <input 
-                    type="radio" 
-                    id="gap_ag_1" 
-                    name="gap_ag" 
-                    value="none" 
-                    checked={GAP_AG == 'none'}
-                    onChange={handleGAPAGChange}
-                />
-                <label for="gap_ag_1">None</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="gap_ag_2" 
-                    name="gap_ag" 
-                    value="basic" 
-                    checked={GAP_AG == 'basic'}
-                    onChange={handleGAPAGChange}
-                />
-                <label for="gap_ag_2">LGMA Basic Agriculture Practices</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="gap_ag_3" 
-                    name="gap_ag" 
-                    value="added" 
-                    checked={GAP_AG == 'added'}
-                    onChange={handleGAPAGChange}
-                />
-                <label for="gap_ag_3">TF added Agricultural Practices</label>
-            </div>
-            <h5>Harvest Practices</h5>
-            <div>
-                <input 
-                    type="radio" 
-                    id="gap_har_1" 
-                    name="gap_har" 
-                    value="none" 
-                    checked={GAP_HAR == 'none'}
-                    onChange={handleGAPHARChange}
-                />
-                <label for="gap_har_1">None</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="gap_har_2" 
-                    name="gap_har" 
-                    value="basic" 
-                    checked={GAP_HAR == 'basic'}
-                    onChange={handleGAPHARChange}
-                />
-                <label for="gap_har_2">LGMA Basic Harvest Practice</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="gap_har_3" 
-                    name="gap_har" 
-                    value="added" 
-                    checked={GAP_HAR == 'added'}
-                    onChange={handleGAPHARChange}
-                />
-                <label for="gap_har_3">TF added Harvest Practices</label>
-            </div>
-
-            <h4>Pre-Harvest Testing - {getFinalResult('stage2_impact')}%</h4>
-            <div>
-                <input 
-                    type="radio" 
-                    id="pre_har_1" 
-                    name="pre_har" 
-                    value="none" 
-                    checked={PRE_HAR == 'none'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_1">None</label>
-
-                <h5>LGMA Based</h5>
-
-                <input 
-                    type="radio" 
-                    id="pre_har_2" 
-                    name="pre_har" 
-                    value="risk" 
-                    checked={PRE_HAR == 'risk'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_2">Risked based sampling</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="pre_har_3" 
-                    name="pre_har" 
-                    value="lot" 
-                    checked={PRE_HAR == 'lot'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_3">Lot based testing</label>
-
-                <h5>Voluntary Testing (Grab samples)</h5>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="pre_har_4" 
-                    name="pre_har" 
-                    value="per_dec" 
-                    checked={PRE_HAR == 'per_dec'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_4">Ten 150g samples per decision</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="pre_har_5" 
-                    name="pre_har" 
-                    value="independent" 
-                    checked={PRE_HAR == 'independent'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_5">Independent 150g samples</label>
-
-                <br/>
-                <input 
-                    type="radio" 
-                    id="pre_har_6" 
-                    name="pre_har" 
-                    value="har_aggregated" 
-                    checked={PRE_HAR == 'har_aggregated'}
-                    onChange={handlePREHARChange}
-                />
-                <label for="pre_har_6">In field aggregated sampling</label>
-            </div>
-
+            <Typography
+                variant='h6'
+                style={{
+                    borderLeft: '5px solid #048BA8',
+                    paddingLeft: '10px'
+                }}
+            >
+                GAP Selection
+                <Typography
+                    variant="caption"
+                    style={{
+                        display: "inline",
+                        color: "red"
+                    }}
+                >
+                    ({getFinalResult('stage1_impact')}%)
+                </Typography>
             
-            <h4>At-Harvest Testing - {getFinalResult('stage3_impact')}%</h4>
-            <div>
-                <input 
-                    type="radio" 
-                    id="at_har_1" 
-                    name="at_har" 
-                    value="none" 
-                    checked={AT_HAR == 'none'}
-                    onChange={handleATHARChange}
-                />
-                <label for="at_har_1">None</label>
+                <RadioGroup
+                    value={GAP_AG}
+                    onChange={(event) => {
+                        setGAP_AG(event.target.value);
+                    }}
+                    style={{
+                        borderLeft: "5px solid #16DB93",
+                        paddingLeft: "1rem"
+                    }}
+                >
+                    <Typography
+                        variant='subtitle1'
+                    >
+                        Agriculture Practices
+                    </Typography>
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Agriculture Practices" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Enhanced Feedback Driven Agricultural Practices" />
 
-                <br/>
-                <input 
-                    type="radio" 
-                    id="at_har_2" 
-                    name="at_har" 
-                    value="150g" 
-                    checked={AT_HAR == '150g'}
-                    onChange={handleATHARChange}
-                />
-                <label for="at_har_2">Ten 150g samples per decision</label>
+                </RadioGroup>
 
-                <br/>
-                <input 
-                    type="radio" 
-                    id="at_har_3" 
-                    name="at_har" 
-                    value="independent" 
-                    checked={AT_HAR == 'independent'}
-                    onChange={handleATHARChange}
-                />
-                <label for="at_har_3">Independent 150g samples</label>
+                <RadioGroup
+                    value={GAP_HAR}
+                    onChange={(event) => {
+                        setGAP_HAR(event.target.value);
+                    }}
+                    style={{
+                        borderLeft: "5px solid #16DB93",
+                        paddingLeft: "1rem",
+                        marginTop: '1rem'
+                    }}
+                >
+                    <Typography
+                        variant='subtitle1'
+                    >
+                        Harvest Practices
+                    </Typography>
 
-                <br/>
-                <input 
-                    type="radio" 
-                    id="at_har_4" 
-                    name="at_har" 
-                    value="2hour" 
-                    checked={AT_HAR == '2hour'}
-                    onChange={handleATHARChange}
-                />
-                <label for="at_har_4">@Harvest 2-hour test</label>
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Harvest Practice" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Seven-Step Sanitation Practices" />
+                </RadioGroup>
 
-                
-            </div>
+            </Typography>
+
+            <Typography
+                variant='h6'
+                style={{
+                    borderLeft: '5px solid #048BA8',
+                    paddingLeft: '10px',
+                    marginTop: '1rem'
+                }}
+            >
+                Pre-Harvest Testing Selection
+                <Typography
+                    variant="caption"
+                    style={{
+                        display: "inline",
+                        color: "red"
+                    }}
+                >
+                    ({getFinalResult('stage2_impact')}%)
+                </Typography>
             
-            <h4>Process - {getFinalResult('stage4_impact')}%</h4>
-            <div>
-                <input 
-                    type="radio" 
-                    id="process_choice_1" 
-                    name="process" 
-                    value="none" 
-                    checked={Process == "none"}
-                    onChange={handleProcessChange}
-                />
-                <label for="process_choice_1">None</label>
-                
-                <br/>
-                <input 
-                    type="radio" 
-                    id="process_choice_2" 
-                    name="process" 
-                    value="traditional" 
-                    checked={Process == "traditional"}
-                    onChange={handleProcessChange}
-                />
-                <label for="process_choice_2">Traditional</label>
+                <RadioGroup
+                    value={PRE_HAR}
+                    onChange={(event) => {
+                        setPRE_HAR(event.target.value);
+                    }}
+                >
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
+                    <Typography
+                        variant='subtitle1'
+                    >
+                        LGMA Based
+                    </Typography>
+                    <FormControlLabel value="risk" control={<Radio size="small" />} label="Risked based sampling" />
+                    <FormControlLabel value="lot" control={<Radio size="small" />} label="Lot based testing" />
+                    <Typography
+                        variant='subtitle1'
+                    >
+                        Voluntary Testing (Grab samples)
+                    </Typography>
+                    <FormControlLabel value="per_dec" control={<Radio size="small" />} label="Ten 150g samples per decision" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
+                    <FormControlLabel value="har_aggregated" control={<Radio size="small" />} label="In field aggregated sampling" />
+                </RadioGroup>
+            </Typography>
 
-                <br/>
-                <input 
-                    type="radio" 
-                    id="process_choice_3" 
-                    name="process" 
-                    value="tf_enhanced" 
-                    checked={Process == "tf_enhanced"}
-                    onChange={handleProcessChange}
-                />
-                <label for="process_choice_3">TF Enhanced</label>
+            <Typography
+                variant='h6'
+                style={{
+                    borderLeft: '5px solid #048BA8',
+                    paddingLeft: '10px',
+                    marginTop: '1rem'
+                }}
+            >
+                At-Harvest Test Selection
+                <Typography
+                    variant="caption"
+                    style={{
+                        display: "inline",
+                        color: "red"
+                    }}
+                >
+                    ({getFinalResult('stage3_impact')}%)
+                </Typography>
+            
+                <RadioGroup
+                    value={AT_HAR}
+                    onChange={(event) => {
+                        setAT_HAR(event.target.value);
+                    }}
+                >
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
+                    <FormControlLabel value="150g" control={<Radio size="small" />} label="Ten 150g samples per decision" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
+                    <FormControlLabel value="2hour" control={<Radio size="small" />} label="@Harvest 2-hour test" />
+                </RadioGroup>
+            </Typography>
 
-                <br/>
-                <input 
-                    type="radio" 
-                    id="process_choice_4" 
-                    name="process" 
-                    value="sw_enhanced" 
-                    checked={Process == "sw_enhanced"}
-                    onChange={handleProcessChange}
-                />
-                <label for="process_choice_4">SW Enhanced</label>
-            </div>
+            <Typography
+                variant='h6'
+                style={{
+                    borderLeft: '5px solid #048BA8',
+                    paddingLeft: '10px',
+                    marginTop: '1rem'
+                }}
+            >
+                Process
+                <Typography
+                    variant="caption"
+                    style={{
+                        display: "inline",
+                        color: "red"
+                    }}
+                >
+                    ({getFinalResult('stage4_impact')}%)
+                </Typography>
+            
+                <RadioGroup
+                    value={Process}
+                    onChange={(event) => {
+                        setProcess(event.target.value);
+                    }}
+                >
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
+                    <FormControlLabel value="traditional" control={<Radio size="small" />} label="Traditional" />
+                    <FormControlLabel value="tf_enhanced" control={<Radio size="small" />} label="TF Enhanced" />
+                    <FormControlLabel value="sw_enhanced" control={<Radio size="small" />} label="SW Enhanced" />
+                </RadioGroup>
+            </Typography>
 
-            <h5>Finished Product Tests (0 - 90) - {getFinalResult('stage5_impact')}%</h5>
-            <div>
-                <input 
-                    type="number" 
-                    max="90" 
-                    min="0" 
+            <Typography
+                variant='h6'
+                style={{
+                    borderLeft: '5px solid #048BA8',
+                    paddingLeft: '10px',
+                    marginTop: '1rem'
+                }}
+            >
+                Finished Product Tests (0 - 90)
+                <Typography
+                    variant="caption"
+                    style={{
+                        display: "inline",
+                        color: "red"
+                    }}
+                >
+                    ({getFinalResult('stage5_impact')}%)
+                </Typography>
+                <br/>
+                <TextField
+                    type="number"
+                    max={90}
+                    min={0}
                     value={Finished}
-                    onChange={handleFinishedChange}    
+                    onChange={handleFinishedChange}
                 />
-            </div>
+            </Typography>
         </form>
     )
 }

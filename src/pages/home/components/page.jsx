@@ -5,6 +5,7 @@ import '../css/page.css';
 import Collapsible from 'react-collapsible';
 import {GAP_AG, GAP_HAR, Process, getResidualRiskSummary, AT_HAR, PRE_HAR } from './../../../util/math';
 import { storeContext } from './../../../util/store';
+import Paper from '@mui/material/Paper';
 
 function Page(props) {
     const [results, setResults] = useState(undefined);
@@ -37,14 +38,16 @@ function Page(props) {
     }, [results, props.store]);
 
     return (
-        <Collapsible trigger="Relative Risk Report" className="page_expand_header" openedClassName="page_expanded_header">
-            <div
-                className="page_container"
-            >
-                <Form setResults={setResults} final_results={final_results}/>
-                <Result results={final_results} />
-            </div>
-        </Collapsible>
+        <Paper
+            style={{
+                "border": "none",
+                width: "100%"
+            }}
+            elevation={4}
+        >
+            <Form setResults={setResults} final_results={final_results}/>
+            <Result results={final_results} />
+        </Paper>
     );
 }
 

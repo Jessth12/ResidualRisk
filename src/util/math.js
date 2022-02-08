@@ -149,5 +149,5 @@ export function getResidualRiskSummary(GAP_AG, GAP_HAR, PRE_HAR, AT_HAR, Process
 function getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Finished) {
     // Res Risk = (1 - Poisson(0, (Load * 10,000 / 3)/illness/gap/process, true) * Row * FP
     let illness = 400;
-    return (1 - poisson(0, load * 10000 / 3 / illness / GAP / Process / PRE_HAR / AT_HAR, true)) * getRaw(load, Finished)
+    return (1 - poisson(0, load * 10000 / 3 / illness / GAP / Process, true)) * getRaw(load, Finished) * getRaw(load, PRE_HAR) * getRaw(load, AT_HAR)
 }

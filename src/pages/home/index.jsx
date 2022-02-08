@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Page from './components/page';
 import './css/index.css';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 
 function Home(props) {
     const [pages, setPages] = useState(1);
@@ -9,41 +12,49 @@ function Home(props) {
         <div
             style={{
                 padding: '1rem',
-                border: '1px solid black',
-                margin: '1rem'
             }}
         >
-            <div
+            <Paper
                 style={{
                     display: "flex",
                     flexDirection: "row",
-                    alignItems: "center"
+                    alignItems: "center",
+                    padding: "1rem",
+                    marginTop: "1rem",
+                    marginBottom: "1rem"
                 }}
+                elevation={4}
             >
                 <h3
                 >Relative Risk App</h3>
-                <button
-                    className="page_control_button"
-                    onClick={() => {
-                        if (pages < 3) {
-                            setPages(pages + 1);
-                        }
-                    
+                <div
+                    style={{
+                        marginLeft: "auto"
                     }}
-                >Add</button>
-                <button
-                    className="page_control_button"
-                    onClick={() => {
-                        if (pages > 1) {
-                            setPages(pages - 1);
-                        }
-                    }}
-                >Remove</button>
-            </div>
+                >
+                    <Button
+                        className="page_control_button"
+                        onClick={() => {
+                            if (pages < 3) {
+                                setPages(pages + 1);
+                            }
+                        
+                        }}
+                    >Add</Button>
+                    <Button
+                        className="page_control_button"
+                        onClick={() => {
+                            if (pages > 1) {
+                                setPages(pages - 1);
+                            }
+                        }}
+                    >Remove</Button>
+                </div>
+            </Paper>
             <div
                 style={{
                     display: 'flex',
-                    overflow: 'scroll'
+                    gap: "2rem"
                 }}
             >
                 {
@@ -51,6 +62,18 @@ function Home(props) {
                         return <Page store={props.store} key={i} />;
                     })
                 }
+            </div>
+            <div
+                style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "2rem"
+                }}
+            >
+                <Typography>
+                    ©2022 SmartWash® Solutions, LLC - All Rights Reserved. 
+                </Typography>
             </div>
         </div>
     );
