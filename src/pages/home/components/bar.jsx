@@ -5,7 +5,7 @@ const MyResponsiveBar = ({results}) => (
     <ResponsiveBar 
         data={results}
         indexBy="id"
-        keys={[ 'GAP Impact', 'Raw Product Impact', 'Process Impact', 'Finished Product Impact']}
+        keys={[ 'GAP Impact', 'Pre Harvest Impact', 'At Harvest Impact', 'Process Impact', 'Finished Product Impact']}
         colors={{ scheme: 'nivo' }}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}

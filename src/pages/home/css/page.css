@@ -3,7 +3,7 @@
 }
 
 .page_expand_header {
-    width: 10rem;
+    width: 100%;
     border: 1px solid black;
     padding: 1rem;
     background-color: lightgray;
@@ -11,7 +11,7 @@
 }
 
 .page_expanded_header {
-    width: fit-content;
+    width: 100%;
     border: 1px solid black;
     padding: 1rem;
     background-color: lightgray;

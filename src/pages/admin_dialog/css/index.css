@@ -1,0 +1,9 @@
+.admin_config_row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.admin_config_row h5 {
+    margin-right: 2rem;
+}

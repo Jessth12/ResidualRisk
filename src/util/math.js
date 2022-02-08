@@ -3,19 +3,21 @@ export const GAP = {
     "wegman": 4,
     "TFA": 4,
     "TFF": 10
-
 }
 
 export const GAP_AG = {
+    "none": 1,
     "basic": 2,
     "added": 3
 }
 export const GAP_HAR = {
+    "none": 1,
     "basic": 2,
     "added": 3
 }
 
 export const Process = {
+    "none": 1,
     "traditional": 5.01,
     "tf_enhanced": 7,
     "sw_enhanced": 10
@@ -82,12 +84,14 @@ const sum = function(data) {
     return data.reduce((a, b) => a + b, 0);
 }
 
-export function getResidualRiskSummary(GAP_AG, PRE_HAR, AT_HAR, Raw, Process, Finished) {
+export function getResidualRiskSummary(GAP_AG, GAP_HAR, PRE_HAR, AT_HAR, Process, Finished) {
 
     let basic_load = getLogSpace(0.0001, 10, 1.3);
     console.log(basic_load);
 
-    let GAP = GAP_AG;
+    console.log({GAP_AG, GAP_HAR});
+
+    let GAP = GAP_AG * GAP_HAR;
 
     console.log({PRE_HAR, AT_HAR})
 
@@ -98,18 +102,16 @@ export function getResidualRiskSummary(GAP_AG, PRE_HAR, AT_HAR, Raw, Process, Fi
         'stage2': [],
         'stage3': [],
         'stage4': [],
-        'stage5': [],
-        'stage6': []
+        'stage5': []
     }
 
     for (let load of basic_load) {
-        let base_risk = getResidualRisk(load, 1, 1, 1, 1, 0, 0);   
-        let stage1_risk = getResidualRisk(load, GAP, 1, 1, 1, 0, 0); // JUST GAP
-        let stage2_risk = getResidualRisk(load, GAP, PRE_HAR, 1, 1, 0, 0); // ADD PRE
-        let stage3_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, 1, 0, 0); // ADD AT 
-        let stage4_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, 1, Raw, 0); // ADD RAW
-        let stage5_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Raw, 0); // ADD PROCESS
-        let stage6_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Raw, Finished); // ADD FINISHED
+        let base_risk = getResidualRisk(load, 1, 1, 1, 1, 0);   
+        let stage1_risk = getResidualRisk(load, GAP, 1, 1, 1, 0); // JUST GAP
+        let stage2_risk = getResidualRisk(load, GAP, PRE_HAR, 1, 1, 0); // ADD PRE
+        let stage3_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, 1, 0); // ADD AT 
+        let stage4_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, 0); // ADD PROCESS
+        let stage5_risk = getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Finished); // ADD FINISHED
 
 
 
@@ -119,7 +121,6 @@ export function getResidualRiskSummary(GAP_AG, PRE_HAR, AT_HAR, Raw, Process, Fi
         table['stage3'].push(stage3_risk);
         table['stage4'].push(stage4_risk);
         table['stage5'].push(stage5_risk);
-        table['stage6'].push(stage6_risk);
     }
 
     table['base_sum'] = sum(table['base']);
@@ -128,28 +129,25 @@ export function getResidualRiskSummary(GAP_AG, PRE_HAR, AT_HAR, Raw, Process, Fi
     table['stage3_sum'] = sum(table['stage3']);
     table['stage4_sum'] = sum(table['stage4']);
     table['stage5_sum'] = sum(table['stage5']);
-    table['stage6_sum'] = sum(table['stage6']);
 
     table['stage1_reduct'] = 1 - (table['stage1_sum'] / table['base_sum']);
     table['stage2_reduct'] = 1 - (table['stage2_sum'] / table['base_sum']);
     table['stage3_reduct'] = 1 - (table['stage3_sum'] / table['base_sum']);
     table['stage4_reduct'] = 1 - (table['stage4_sum'] / table['base_sum']);
     table['stage5_reduct'] = 1 - (table['stage5_sum'] / table['base_sum']);
-    table['stage6_reduct'] = 1 - (table['stage6_sum'] / table['base_sum']);
 
     table['stage1_impact'] = table['stage1_reduct'];
     table['stage2_impact'] = table['stage2_reduct'] - table['stage1_reduct'];
     table['stage3_impact'] = table['stage3_reduct'] - table['stage2_reduct'];
     table['stage4_impact'] = table['stage4_reduct'] - table['stage3_reduct'];
     table['stage5_impact'] = table['stage5_reduct'] - table['stage4_reduct'];
-    table['stage6_impact'] = table['stage6_reduct'] - table['stage5_reduct'];
 
     console.log(table);
     return table;
 }
 
-function getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Raw, Finished) {
+function getResidualRisk(load, GAP, PRE_HAR, AT_HAR, Process, Finished) {
     // Res Risk = (1 - Poisson(0, (Load * 10,000 / 3)/illness/gap/process, true) * Row * FP
     let illness = 400;
-    return (1 - poisson(0, load * 10000 / 3 / illness / GAP / Process / PRE_HAR / AT_HAR, true)) * getRaw(load, Raw) * getRaw(load, Finished)
+    return (1 - poisson(0, load * 10000 / 3 / illness / GAP / Process / PRE_HAR / AT_HAR, true)) * getRaw(load, Finished)
 }
