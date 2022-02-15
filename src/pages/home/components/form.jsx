@@ -56,8 +56,8 @@ function Form(props) {
         let finished = event.target.value;
         console.log('Finished: ' + finished);
         
-        if (finished > 90) {
-            finished = 90;
+        if (finished > 5) {
+            finished = 5;
         } else if (finished < 0) {
             finished = 0;
         }
@@ -151,9 +151,9 @@ function Form(props) {
                     >
                         Agriculture Practices
                     </Typography>
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Agriculture Practices" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Enhanced Feedback Driven Agricultural Practices" />
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Take advantage of the commodity market and USDA guidelines, use 3rd party audits as available" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="Add a requirement for 3rd party audits and an annual visit to some portion of farm-lots" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground throughout the season with power to direct production away from potential challenges" />
 
                 </RadioGroup>
 
@@ -174,9 +174,9 @@ function Form(props) {
                         Harvest Practices
                     </Typography>
 
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Harvest Practice" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Seven-Step Sanitation Practices" />
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Rely on GAP and GMP compliance of harvester team" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="Add requirement for specific sanitation practices" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add staff on the ground to monitor and validate sanitation to prevent deviations" />
                 </RadioGroup>
             </Collapsible>
 
@@ -216,22 +216,22 @@ function Form(props) {
                         setPRE_HAR(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <Typography
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Rely on GAP" />
+                    {/* <Typography
                         variant='subtitle1'
                     >
                         LGMA Based
-                    </Typography>
-                    <FormControlLabel value="risk" control={<Radio size="small" />} label="Risked based sampling" />
-                    <FormControlLabel value="lot" control={<Radio size="small" />} label="Lot based testing" />
-                    <Typography
+                    </Typography> */}
+                    <FormControlLabel value="risk" control={<Radio size="small" />} label="Add risk-based N=60 testing " />
+                    <FormControlLabel value="lot" control={<Radio size="small" />} label="Add regular lot-based testing" />
+                    {/* <Typography
                         variant='subtitle1'
                     >
                         Voluntary Testing (Grab samples)
-                    </Typography>
-                    <FormControlLabel value="per_dec" control={<Radio size="small" />} label="Ten 150g samples per decision" />
-                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
-                    <FormControlLabel value="har_aggregated" control={<Radio size="small" />} label="In field aggregated sampling" />
+                    </Typography> */}
+                    <FormControlLabel value="per_dec" control={<Radio size="small" />} label="Increase testing to 10 N=60 tests per decision" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Divide GRL into harvest sublot for independent N=60 testing" />
+                    <FormControlLabel value="har_aggregated" control={<Radio size="small" />} label="Apply In field aggregated sampling" />
                 </RadioGroup>
             </Collapsible>
 
@@ -271,10 +271,10 @@ function Form(props) {
                         setAT_HAR(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-                    <FormControlLabel value="150g" control={<Radio size="small" />} label="Ten 150g samples per decision" />
-                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
-                    <FormControlLabel value="2hour" control={<Radio size="small" />} label="@Harvest 2-hour test" />
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="Rely on Preharvest Testing" />
+                    <FormControlLabel value="150g" control={<Radio size="small" />} label="Ten 150g samples per harvest lot" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples per two trailer load" />
+                    <FormControlLabel value="2hour" control={<Radio size="small" />} label="Aggregated sample per trailer" />
                 </RadioGroup>
             </Collapsible>
 
@@ -314,10 +314,10 @@ function Form(props) {
                         setProcess(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-                    <FormControlLabel value="traditional" control={<Radio size="small" />} label="Traditional" />
-                    <FormControlLabel value="tf_enhanced" control={<Radio size="small" />} label="TF Enhanced" />
-                    <FormControlLabel value="sw_enhanced" control={<Radio size="small" />} label="SW Enhanced" />
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="Manual control of sanitizer" />
+                    <FormControlLabel value="traditional" control={<Radio size="small" />} label="Redox control of chlorine" />
+                    <FormControlLabel value="tf_enhanced" control={<Radio size="small" />} label="ASAP control with SW" />
+                    <FormControlLabel value="sw_enhanced" control={<Radio size="small" />} label="ASAP control with SW and Boost pretreatment" />
                 </RadioGroup>
             </Collapsible>
 
@@ -355,11 +355,12 @@ function Form(props) {
                 <br/>
                 <TextField
                     type="number"
-                    max={10}
+                    max={5}
                     min={0}
                     value={Finished}
                     onChange={handleFinishedChange}
-                    helperText="Range 0 - 10 tests"
+                    label='Per Hour in concert'
+                    helperText="Range 0 - 5 tests"
                 />
             </Collapsible>
         </form>

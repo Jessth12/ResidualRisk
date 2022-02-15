@@ -86,7 +86,7 @@ const sum = function(data) {
 
 export function getResidualRiskSummary(GAP_AG, GAP_HAR, PRE_HAR, AT_HAR, Process, Finished) {
 
-    let basic_load = getLogSpace(0.0001, 10, 1.3);
+    let basic_load = getLogSpace(0.0001, 2, 1.05);
     console.log(basic_load);
 
     console.log({GAP_AG, GAP_HAR});

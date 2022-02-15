@@ -20,8 +20,8 @@ const MyResponsivePie = ({ data }) => (
 
         startAngle={-90}
         endAngle={90}
-        innerRadius={.5}
 
+        innerRadius={.5}
         theme={{
             fontSize: '20px'
         }}
