@@ -118,7 +118,7 @@ function Form(props) {
                             style={{
                                 
                                 display: "inline",
-                                color: "red",
+                                color: "green",
                                 fontSize: 18
 
                                 
@@ -196,7 +196,7 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red",
+                                color: "green",
                                 fontSize: 18
 
                             }}
@@ -253,7 +253,7 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red",
+                                color: "green",
                                 fontSize: 18
                             }}
                         >
@@ -297,7 +297,7 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red",
+                                color: "green",
                                 fontSize: 18
                             }}
                         >
@@ -341,7 +341,7 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red",
+                                color: "green",
                                 fontSize: 18
                             }}
                         >

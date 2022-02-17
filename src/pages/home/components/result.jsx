@@ -136,7 +136,7 @@ function Result(props) {
                                 Total Impact
                                 <Typography
                                     variant="subtitle1"
-                                    color="red"
+                                    color="green"
                                    fontSize={23}
                                 >
                                     {(round(props.results['stage1_impact'] + props.results['stage2_impact'] + props.results['stage3_impact'] + props.results['stage4_impact'] + props.results['stage5_impact'], 4) * 100).toFixed(2)} %
