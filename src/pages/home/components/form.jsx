@@ -8,6 +8,7 @@ import Collapsible from 'react-collapsible';
 import '../css/form.css';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { fontSize, style } from '@mui/system';
 
 function round(base, sigs) {
     return Number.parseFloat(base).toPrecision(sigs);
@@ -90,8 +91,8 @@ function Form(props) {
             PRE_HAR != undefined && 
             AT_HAR != undefined &&
             Process != undefined && 
-            Finished != undefined &&
-            improvement != undefined
+            Finished != undefined 
+           // improvement != undefined
             ) {
             props.setResults({GAP_AG, GAP_HAR, AT_HAR, PRE_HAR, Process, Finished});
         }
@@ -115,8 +116,12 @@ function Form(props) {
                         <Typography
                             variant="caption"
                             style={{
+                                
                                 display: "inline",
-                                color: "red"
+                                color: "red",
+                                fontSize: 18
+
+                                
                             }}
                         >
                             ({getFinalResult('stage1_impact')}%)
@@ -191,7 +196,9 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "red",
+                                fontSize: 18
+
                             }}
                         >
                             ({getFinalResult('stage2_impact')}%)
@@ -246,7 +253,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "red",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage3_impact')}%)
@@ -289,7 +297,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "red",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage4_impact')}%)
@@ -332,7 +341,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "red",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage5_impact')}%)

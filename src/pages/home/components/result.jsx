@@ -131,13 +131,15 @@ function Result(props) {
                             <Typography
                                 textAlign="center"
                                 variant="subtitle1"
+                                //fontSize={2}
                             >
                                 Total Impact
                                 <Typography
                                     variant="subtitle1"
                                     color="red"
+                                   fontSize={23}
                                 >
-                                    {round(props.results['stage1_impact'] + props.results['stage2_impact'] + props.results['stage3_impact'] + props.results['stage4_impact'] + props.results['stage5_impact'], 4) }
+                                    {(round(props.results['stage1_impact'] + props.results['stage2_impact'] + props.results['stage3_impact'] + props.results['stage4_impact'] + props.results['stage5_impact'], 4) * 100).toFixed(2)} %
                                 </Typography>
                                 
                             </Typography>
