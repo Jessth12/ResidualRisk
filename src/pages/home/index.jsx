@@ -11,7 +11,9 @@ function Home(props) {
     return (
         <div
             style={{
-                padding: '1rem',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%'
             }}
         >
             <Paper
@@ -20,13 +22,13 @@ function Home(props) {
                     flexDirection: "row",
                     alignItems: "center",
                     padding: "1rem",
-                    marginTop: "1rem",
+                    margin: "1rem",
                     marginBottom: "1rem"
                 }}
                 elevation={4}
             >
                 <h3
-                >Relative Risk App</h3>
+                >Relative Risk Comparator App</h3>
                 <div
                     style={{
                         marginLeft: "auto"
@@ -54,7 +56,10 @@ function Home(props) {
             <div
                 style={{
                     display: 'flex',
-                    gap: "2rem"
+                    gap: "2rem",
+                    margin: '1rem',
+                    flex: '1',
+                    justifyContent: 'center'
                 }}
             >
                 {
@@ -68,7 +73,8 @@ function Home(props) {
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                    marginTop: "2rem"
+                    marginTop: "1rem",
+                    marginBottom: "1rem"
                 }}
             >
                 <Typography>

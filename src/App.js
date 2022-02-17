@@ -20,7 +20,9 @@ const App = () => {
     return (
         <div
           style={{
-            backgroundColor: "#eee"
+            backgroundColor: "#eee",
+            height: '100%',
+            width: '100%'
           }}
         >
             <Home store={store} />

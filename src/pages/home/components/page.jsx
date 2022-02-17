@@ -40,13 +40,24 @@ function Page(props) {
     return (
         <Paper
             style={{
-                "border": "none",
-                width: "100%"
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                maxWidth: '800px'
             }}
             elevation={4}
         >
             <Form setResults={setResults} final_results={final_results}/>
-            <Result results={final_results} />
+            <div
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
+                <Result results={final_results} />
+            </div>
         </Paper>
     );
 }

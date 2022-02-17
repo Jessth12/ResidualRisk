@@ -1,13 +1,18 @@
-import { RadioGroup, Radio, Typography } from '@mui/material';
+import { RadioGroup, Radio, Typography, Icon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { TextField } from '@mui/material';
+import Collapsible from 'react-collapsible';
+import '../css/form.css';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function round(base, sigs) {
     return Number.parseFloat(base).toPrecision(sigs);
 }
+
 
 function Form(props) {
     const [GAP_AG, setGAP_AG] = useState("none");
@@ -16,6 +21,11 @@ function Form(props) {
     const [Process, setProcess] = useState("none");
     const [Finished, setFinished] = useState(0);
     const [AT_HAR, setAT_HAR] = useState("none");
+    const [GAP_open, set_GAP_open] = useState(false);
+    const [PRE_open, set_PRE_open] = useState(false);
+    const [AT_HAR_open, set_AT_HAR_open] = useState(false);
+    const [Process_open, set_Process_open] = useState(false);
+    const [finished_open, set_finished_open] = useState(false);
 
     const handleGAPAGChange = (event) => {
         console.log(event.target.value);
@@ -46,13 +56,21 @@ function Form(props) {
         let finished = event.target.value;
         console.log('Finished: ' + finished);
         
-        if (finished > 90) {
-            finished = 90;
+        if (finished > 5) {
+            finished = 5;
         } else if (finished < 0) {
             finished = 0;
         }
 
         setFinished(finished);
+    }
+
+    const handleOpenCollap = () => {
+        set_GAP_open(false);
+        set_PRE_open(false);
+        set_AT_HAR_open(false);
+        set_Process_open(false);
+        set_finished_open(false);
     }
 
     const getFinalResult = (key) => {
@@ -82,27 +100,42 @@ function Form(props) {
     return (
         <form
             style={{
-                padding: '1rem'
+                padding: '1rem',
+                flex: 1
             }}
         >
 
-            <Typography
-                variant='h6'
-                style={{
-                    borderLeft: '5px solid #048BA8',
-                    paddingLeft: '10px'
+            <Collapsible
+                trigger={(
+                    <Typography
+                        variant='h6'
+                    >
+                        Gap Selection
+
+                        <Typography
+                            variant="caption"
+                            style={{
+                                display: "inline",
+                                color: "red"
+                            }}
+                        >
+                            ({getFinalResult('stage1_impact')}%)
+                        </Typography>
+                
+                        <Icon>
+                            {GAP_open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+                        </Icon>
+                    </Typography>
+                )}
+                containerElementProps={{
+                    "class": "options_collap"
+                }}
+                open={GAP_open}
+                handleTriggerClick={() => {
+                    handleOpenCollap();
+                    set_GAP_open(!GAP_open);
                 }}
             >
-                GAP Selection
-                <Typography
-                    variant="caption"
-                    style={{
-                        display: "inline",
-                        color: "red"
-                    }}
-                >
-                    ({getFinalResult('stage1_impact')}%)
-                </Typography>
             
                 <RadioGroup
                     value={GAP_AG}
@@ -119,9 +152,9 @@ function Form(props) {
                     >
                         Agriculture Practices
                     </Typography>
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Agriculture Practices" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Enhanced Feedback Driven Agricultural Practices" />
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Take advantage of the commodity market and USDA guidelines, use 3rd party audits as available" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="Add a requirement for 3rd party audits and an annual visit to some portion of farm-lots" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground throughout the season with power to direct production away from potential challenges" />
 
                 </RadioGroup>
 
@@ -142,148 +175,195 @@ function Form(props) {
                         Harvest Practices
                     </Typography>
 
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <FormControlLabel value="basic" control={<Radio size="small" />} label="LGMA Basic Harvest Practice" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Seven-Step Sanitation Practices" />
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Rely on GAP and GMP compliance of harvester team" />
+                    <FormControlLabel value="basic" control={<Radio size="small" />} label="Add requirement for specific sanitation practices" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add staff on the ground to monitor and validate sanitation to prevent deviations" />
                 </RadioGroup>
+            </Collapsible>
 
-            </Typography>
+            <Collapsible
+                trigger={(
+                    <Typography
+                        variant='h6'
+                    >
+                        Pre-Harvest Testing Selection
+                        <Typography
+                            variant="caption"
+                            style={{
+                                display: "inline",
+                                color: "red"
+                            }}
+                        >
+                            ({getFinalResult('stage2_impact')}%)
+                        </Typography>
 
-            <Typography
-                variant='h6'
-                style={{
-                    borderLeft: '5px solid #048BA8',
-                    paddingLeft: '10px',
-                    marginTop: '1rem'
+                        <Icon>
+                            {PRE_open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+                        </Icon>
+                    </Typography>
+                )}
+                containerElementProps={{
+                    "class": "options_collap"
                 }}
-            >
-                Pre-Harvest Testing Selection
-                <Typography
-                    variant="caption"
-                    style={{
-                        display: "inline",
-                        color: "red"
-                    }}
-                >
-                    ({getFinalResult('stage2_impact')}%)
-                </Typography>
-            
+                open={PRE_open}
+                handleTriggerClick={() => {
+                    handleOpenCollap();
+                    set_PRE_open(!PRE_open);
+                }}
+            >        
                 <RadioGroup
                     value={PRE_HAR}
                     onChange={(event) => {
                         setPRE_HAR(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small"/>} label="None" />
-                    <Typography
+                    <FormControlLabel value="none" control={<Radio size="small"/>} label="Rely on GAP" />
+                    {/* <Typography
                         variant='subtitle1'
                     >
                         LGMA Based
-                    </Typography>
-                    <FormControlLabel value="risk" control={<Radio size="small" />} label="Risked based sampling" />
-                    <FormControlLabel value="lot" control={<Radio size="small" />} label="Lot based testing" />
-                    <Typography
+                    </Typography> */}
+                    <FormControlLabel value="risk" control={<Radio size="small" />} label="Add risk-based N=60 testing " />
+                    <FormControlLabel value="lot" control={<Radio size="small" />} label="Add regular lot-based testing" />
+                    {/* <Typography
                         variant='subtitle1'
                     >
                         Voluntary Testing (Grab samples)
-                    </Typography>
-                    <FormControlLabel value="per_dec" control={<Radio size="small" />} label="Ten 150g samples per decision" />
-                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
-                    <FormControlLabel value="har_aggregated" control={<Radio size="small" />} label="In field aggregated sampling" />
+                    </Typography> */}
+                    <FormControlLabel value="per_dec" control={<Radio size="small" />} label="Increase testing to 10 N=60 tests per decision" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Divide GRL into harvest sublot for independent N=60 testing" />
+                    <FormControlLabel value="har_aggregated" control={<Radio size="small" />} label="Apply In field aggregated sampling" />
                 </RadioGroup>
-            </Typography>
+            </Collapsible>
 
-            <Typography
-                variant='h6'
-                style={{
-                    borderLeft: '5px solid #048BA8',
-                    paddingLeft: '10px',
-                    marginTop: '1rem'
+            <Collapsible
+                trigger={(
+                    <Typography
+                        variant='h6'
+                    >
+                        At-Harvest Test Selection
+                        <Typography
+                            variant="caption"
+                            style={{
+                                display: "inline",
+                                color: "red"
+                            }}
+                        >
+                            ({getFinalResult('stage3_impact')}%)
+                        </Typography>
+
+                        <Icon>
+                            {AT_HAR_open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+                        </Icon>
+                    </Typography>
+                )}
+                containerElementProps={{
+                    "class": "options_collap"
+                }}
+                open={AT_HAR_open}
+                handleTriggerClick={() => {
+                    handleOpenCollap();
+                    set_AT_HAR_open(!AT_HAR_open);
                 }}
             >
-                At-Harvest Test Selection
-                <Typography
-                    variant="caption"
-                    style={{
-                        display: "inline",
-                        color: "red"
-                    }}
-                >
-                    ({getFinalResult('stage3_impact')}%)
-                </Typography>
-            
                 <RadioGroup
                     value={AT_HAR}
                     onChange={(event) => {
                         setAT_HAR(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-                    <FormControlLabel value="150g" control={<Radio size="small" />} label="Ten 150g samples per decision" />
-                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples" />
-                    <FormControlLabel value="2hour" control={<Radio size="small" />} label="@Harvest 2-hour test" />
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="Rely on Preharvest Testing" />
+                    <FormControlLabel value="150g" control={<Radio size="small" />} label="Ten 150g samples per harvest lot" />
+                    <FormControlLabel value="independent" control={<Radio size="small" />} label="Independent 150g samples per two trailer load" />
+                    <FormControlLabel value="2hour" control={<Radio size="small" />} label="Aggregated sample per trailer" />
                 </RadioGroup>
-            </Typography>
+            </Collapsible>
 
-            <Typography
-                variant='h6'
-                style={{
-                    borderLeft: '5px solid #048BA8',
-                    paddingLeft: '10px',
-                    marginTop: '1rem'
+            <Collapsible
+                trigger={(
+                    <Typography
+                        variant='h6'
+                    >
+                        Process
+                        <Typography
+                            variant="caption"
+                            style={{
+                                display: "inline",
+                                color: "red"
+                            }}
+                        >
+                            ({getFinalResult('stage4_impact')}%)
+                        </Typography>
+
+                        <Icon>
+                            {Process_open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+                        </Icon>
+                    </Typography>
+                )}
+                containerElementProps={{
+                    "class": "options_collap"
+                }}
+                open={Process_open}
+                handleTriggerClick={() => {
+                    handleOpenCollap();
+                    set_Process_open(!Process_open);
                 }}
             >
-                Process
-                <Typography
-                    variant="caption"
-                    style={{
-                        display: "inline",
-                        color: "red"
-                    }}
-                >
-                    ({getFinalResult('stage4_impact')}%)
-                </Typography>
-            
                 <RadioGroup
                     value={Process}
                     onChange={(event) => {
                         setProcess(event.target.value);
                     }}
                 >
-                    <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-                    <FormControlLabel value="traditional" control={<Radio size="small" />} label="Traditional" />
-                    <FormControlLabel value="tf_enhanced" control={<Radio size="small" />} label="TF Enhanced" />
-                    <FormControlLabel value="sw_enhanced" control={<Radio size="small" />} label="SW Enhanced" />
+                    <FormControlLabel value="none" control={<Radio size="small" />} label="Manual control of sanitizer" />
+                    <FormControlLabel value="traditional" control={<Radio size="small" />} label="Redox control of chlorine" />
+                    <FormControlLabel value="tf_enhanced" control={<Radio size="small" />} label="ASAP control with SW" />
+                    <FormControlLabel value="sw_enhanced" control={<Radio size="small" />} label="ASAP control with SW and Boost pretreatment" />
                 </RadioGroup>
-            </Typography>
+            </Collapsible>
 
-            <Typography
-                variant='h6'
-                style={{
-                    borderLeft: '5px solid #048BA8',
-                    paddingLeft: '10px',
-                    marginTop: '1rem'
+            <Collapsible
+                trigger={(
+                    <Typography
+                        variant='h6'
+                    >
+                        Finished Product Tests
+                        <Typography
+                            variant="caption"
+                            style={{
+                                display: "inline",
+                                color: "red"
+                            }}
+                        >
+                            ({getFinalResult('stage5_impact')}%)
+                        </Typography>
+
+                        <Icon>
+                            {finished_open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+                        </Icon>
+                    </Typography>
+                )}
+                containerElementProps={{
+                    "class": "options_collap"
+                }}
+                open={finished_open}
+                handleTriggerClick={() => {
+                    handleOpenCollap();
+                    set_finished_open(!finished_open);
                 }}
             >
-                Finished Product Tests (0 - 90)
-                <Typography
-                    variant="caption"
-                    style={{
-                        display: "inline",
-                        color: "red"
-                    }}
-                >
-                    ({getFinalResult('stage5_impact')}%)
-                </Typography>
+            
                 <br/>
                 <TextField
                     type="number"
-                    max={90}
+                    max={5}
                     min={0}
                     value={Finished}
                     onChange={handleFinishedChange}
+                    label='Per Hour in concert'
+                    helperText="Range 0 - 5 tests"
                 />
-            </Typography>
+            </Collapsible>
         </form>
     )
 }
