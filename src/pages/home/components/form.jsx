@@ -159,7 +159,7 @@ function Form(props) {
                     </Typography>
                     <FormControlLabel value="none" control={<Radio size="small"/>} label="Take advantage of the commodity market and USDA guidelines, use 3rd party audits as available" />
                     <FormControlLabel value="basic" control={<Radio size="small" />} label="Add a requirement for 3rd party audits and an annual visit to some portion of farm-lots" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground throughout the season with power to direct production away from potential challenges" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground bi-weekly throughout the season with power to direct production away from potential challenges" />
 
                 </RadioGroup>
 
