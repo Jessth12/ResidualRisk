@@ -8,25 +8,25 @@ export const GAP = {
 export const GAP_AG = {
     "none": 1,
     "basic": 2,
-    "added": 3
+    "added": 10
 }
 export const GAP_HAR = {
     "none": 1,
-    "basic": 2,
-    "added": 3
+    "basic": 1.5,
+    "added": 2
 }
 
 export const Process = {
-    "none": 1,
-    "traditional": 5.01,
-    "tf_enhanced": 7,
+    "none": 5,
+    "traditional": 5,
+    "tf_enhanced": 10,
     "sw_enhanced": 10
 }
 
 export const PRE_HAR = {
     "none": 1,
-    "risk": .5 * 10,
-    "lot":  .75 * 10,
+    "risk": 6,
+    "lot":  9,
     "per_dec": 10,
     "independent": 1,
     "har_aggregated": 30
