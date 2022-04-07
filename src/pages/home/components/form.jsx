@@ -8,6 +8,7 @@ import Collapsible from 'react-collapsible';
 import '../css/form.css';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { fontSize, style } from '@mui/system';
 
 function round(base, sigs) {
     return Number.parseFloat(base).toPrecision(sigs);
@@ -90,7 +91,8 @@ function Form(props) {
             PRE_HAR != undefined && 
             AT_HAR != undefined &&
             Process != undefined && 
-            Finished != undefined
+            Finished != undefined 
+           // improvement != undefined
             ) {
             props.setResults({GAP_AG, GAP_HAR, AT_HAR, PRE_HAR, Process, Finished});
         }
@@ -114,8 +116,12 @@ function Form(props) {
                         <Typography
                             variant="caption"
                             style={{
+                                
                                 display: "inline",
-                                color: "red"
+                                color: "green",
+                                fontSize: 18
+
+                                
                             }}
                         >
                             ({getFinalResult('stage1_impact')}%)
@@ -153,7 +159,7 @@ function Form(props) {
                     </Typography>
                     <FormControlLabel value="none" control={<Radio size="small"/>} label="Take advantage of the commodity market and USDA guidelines, use 3rd party audits as available" />
                     <FormControlLabel value="basic" control={<Radio size="small" />} label="Add a requirement for 3rd party audits and an annual visit to some portion of farm-lots" />
-                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground throughout the season with power to direct production away from potential challenges" />
+                    <FormControlLabel value="added" control={<Radio size="small" />} label="Add a requirement for staff on the ground bi-weekly throughout the season with power to direct production away from potential challenges" />
 
                 </RadioGroup>
 
@@ -190,7 +196,9 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "green",
+                                fontSize: 18
+
                             }}
                         >
                             ({getFinalResult('stage2_impact')}%)
@@ -245,7 +253,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "green",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage3_impact')}%)
@@ -288,7 +297,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "green",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage4_impact')}%)
@@ -331,7 +341,8 @@ function Form(props) {
                             variant="caption"
                             style={{
                                 display: "inline",
-                                color: "red"
+                                color: "green",
+                                fontSize: 18
                             }}
                         >
                             ({getFinalResult('stage5_impact')}%)
