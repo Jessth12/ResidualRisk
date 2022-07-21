@@ -4,29 +4,33 @@ const storeValues = {
     "GAP_AG": {
         "none": 1,
         "basic": 2,
+        "basic2": 4,
         "added": 10
     },
     "GAP_HAR": {
-        "none": 1,
-        "basic": 1.5,
+        "none": .2,
+        "basic": .5,
+        "basic2": 1,
+        "basic3": 1.5,
         "added": 2
     },
     "Process": {
-        "none": 1,
-        "traditional": 5,
-        "tf_enhanced": 10,
-        "sw_enhanced": 50
+        "a": .2,
+        "b": 1,
+        "c": 5,
+        "d": 10,
+        "e": 50
     },
     "PRE_HAR": {
-        "none": 1,
-        "risk": 6,
-        "lot":  9,
-        "per_dec": 10,
-        "independent": 1,
-        "har_aggregated": 30
+        "a": 0,
+        "b": 0.6,
+        "c": 6.8,
+        "d": 10,
+        "e": 1,
+        "f": 30
     },
     "AT_HAR": {
-        "none": 1,
+        "none": 0,
         "150g": 10,
         "independent": 1,
         "2hour": 25

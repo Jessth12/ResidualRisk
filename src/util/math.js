@@ -8,19 +8,23 @@ export const GAP = {
 export const GAP_AG = {
     "none": 1,
     "basic": 2,
+    "basic2": 4,
     "added": 10
 }
 export const GAP_HAR = {
-    "none": 1,
-    "basic": 1.5,
+    "none": .2,
+    "basic": .5,
+    "basic2": 1,
+    "basic3": 1.5,
     "added": 2
 }
 
 export const Process = {
-    "none": 5,
-    "traditional": 5,
-    "tf_enhanced": 10,
-    "sw_enhanced": 10
+    "a": .2,
+    "b": 1,
+    "c": 5,
+    "d": 10,
+    "e": 50
 }
 
 export const PRE_HAR = {
@@ -33,7 +37,7 @@ export const PRE_HAR = {
 }
 
 export const AT_HAR = {
-    "none": 1,
+    "none": 0,
     "150g": 10,
     "independent": 1,
     "2hour": 25

@@ -48,7 +48,6 @@ function Page(props) {
             }}
             elevation={4}
         >
-            <Form setResults={setResults} final_results={final_results}/>
             <div
                 style={{
                     width: '100%',
@@ -58,6 +57,7 @@ function Page(props) {
             >
                 <Result results={final_results} />
             </div>
+            <Form setResults={setResults} final_results={final_results}/>
         </Paper>
     );
 }

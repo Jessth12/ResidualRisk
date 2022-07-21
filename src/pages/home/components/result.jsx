@@ -144,7 +144,7 @@ function Result(props) {
                                 
                             </Typography>
 
-                            <div style={{height: '25rem', width: '30rem'}}>
+                            <div style={{height: '15rem', width: '30rem'}}>
                                 <MyResponsivePie
                                     data={convertResultsToPieFormat(props.results)}
                                 />
